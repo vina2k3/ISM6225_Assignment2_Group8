@@ -47,6 +47,7 @@ namespace Assignment2_CT_Spring2020
             char[] arr = new char[] { 'a', 'g', 'h', 'a' };
             int k = 3;
             Console.WriteLine(ContainsDuplicate(arr, k));
+            Console.WriteLine();
             Console.WriteLine("Question 7");
             int rodLength = 4;
             int priceProduct = GoldRod(rodLength);
@@ -289,12 +290,29 @@ namespace Assignment2_CT_Spring2020
             try
             {
                 //Write Your Code Here13
+                //Returns the max possible product  
+                static int maxProfit(int n)
+                {
+                    // Keep removing parts of size 3 while n is greater than 4 
+                    int rodPice = 1;
+                    while (n > 4)
+                    {
+                        n -= 3;
+
+                        // Keep multiplying 3 to rodPrice when each parts of size 3 was removed.
+                        rodPice *= 3;
+                    }
+
+                    // The last part of rod multiplied by the price of previous parts 
+                    return (n * rodPice);
+                }
+
+                return maxProfit(rodLength);
             }
             catch (Exception)
             {
                 throw;
             }
-            return 0;
         }
         public static bool DictSearch(string[] userDict, string keyword)
         {
