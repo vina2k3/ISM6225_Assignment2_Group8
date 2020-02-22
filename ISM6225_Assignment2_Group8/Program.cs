@@ -42,7 +42,6 @@ namespace Assignment2_CT_Spring2020
             Console.WriteLine("Part 2- Intersection of two arrays is: ");
             DisplayArray(intersect2);
             Console.WriteLine("\n");
-            Console.WriteLine();
             Console.WriteLine("Question 6");
             char[] arr = new char[] { 'a', 'g', 'h', 'a' };
             int k = 3;
@@ -193,8 +192,6 @@ namespace Assignment2_CT_Spring2020
                 var dict = new Dictionary<int, int>();
                 Array.Sort(nums1);
                 Array.Sort(nums2);
-                int i = 0;
-                int j = 0;
                 int indexS1 = 0, indexS2 = 0;
                 //while either array still has an element
                 while (indexS1 < nums1.Length || indexS2 < nums2.Length)
@@ -319,6 +316,23 @@ namespace Assignment2_CT_Spring2020
             try
             {
                 //Write Your Code Here
+                // Create a new dictionary of int, with char keys. 
+                Dictionary<int, string> myDictQ7 = new Dictionary<int, string>();
+                // Adding key/ value pairs in myDictQ5b from nums1
+                for (int i = 0; i < userDict.Length; i++)
+                {
+                    myDictQ7.Add(i, userDict[i]);
+                }
+                // Create a list to store the intersect numbers
+                List<int> outputList = new List<int>();
+                // Scan nums2, check whether there is a same number 
+                for (int t = 0; t < userDict.Length; t++)
+                {
+                    if (myDictQ7.ContainsValue(keyword))
+                        return false;
+                    else
+                        return true;
+                }
             }
             catch (Exception)
             {
