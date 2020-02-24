@@ -361,12 +361,12 @@ namespace Assignment2_CT_Spring2020
                 char[] inputCharS3 = inputS3.ToCharArray();
 
                 string newStr = inputS1 + inputS2 + inputS3;
-                // Split input string veriable to CharArray
+                // Split input string veriable to CharArray.
                 // Check how many different letters are used in all of the input veriables
                 char[] newCharArray = newStr.ToCharArray();
                 // Sort char array
                 Array.Sort(newCharArray);
-                // Remove duplicate values in new char array
+                // Remove duplicate values in new char array.
                 char[] letterUsed = newCharArray.Distinct().ToArray();
                 // Create new dictionary to store input letters and possible values
                 Dictionary<char, int> inputDict = new Dictionary<char, int>();
