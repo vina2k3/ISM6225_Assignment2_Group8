@@ -399,7 +399,7 @@ namespace Assignment2_CT_Spring2020
                 var minNum = (ulong)Math.Pow(10, CharLength - 2);
                 var maxNum = (ulong)Math.Pow(10, CharLength);
 
-                // Check each combination
+                // Check each combination.
                 for (var j = minNum; j < maxNum; j++)
                 {
                     bool findSolution = false;
