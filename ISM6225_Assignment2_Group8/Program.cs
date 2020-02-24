@@ -281,12 +281,11 @@ namespace Assignment2_CT_Spring2020
                 throw;
             }
         }
-
         public static int GoldRod(int rodLength)
         {
             try
             {
-                //Write Your Code Here13
+                //Write Your Code Here
                 //Returns the max possible product  
                 static int maxProfit(int n)
                 {
@@ -305,6 +304,7 @@ namespace Assignment2_CT_Spring2020
                 }
 
                 return maxProfit(rodLength);
+
             }
             catch (Exception)
             {
@@ -317,34 +317,138 @@ namespace Assignment2_CT_Spring2020
             {
                 //Write Your Code Here
                 // Create a new dictionary of int, with char keys. 
-                Dictionary<int, string> myDictQ7 = new Dictionary<int, string>();
-                // Adding key/ value pairs in myDictQ5b from nums1
+                Dictionary<int, string> myDictQ8 = new Dictionary<int, string>();
+                // Adding store each word of userDict array to the new dictionary of myDictQ8
                 for (int i = 0; i < userDict.Length; i++)
                 {
-                    myDictQ7.Add(i, userDict[i]);
+                    myDictQ8.Add(i, userDict[i]);
                 }
-                // Create a list to store the intersect numbers
-                List<int> outputList = new List<int>();
-                // Scan nums2, check whether there is a same number 
-                for (int t = 0; t < userDict.Length; t++)
-                {
-                    if (myDictQ7.ContainsValue(keyword))
-                        return false;
-                    else
-                        return true;
-                }
+
+                // Check whether the word is correct or not
+                if (myDictQ8.ContainsValue(keyword))
+                    return false;
+                else
+                    return true;
+
+
             }
             catch (Exception)
             {
                 throw;
             }
-            return default;
         }
+
         public static void SolvePuzzle()
         {
             try
             {
                 //Write Your Code Here
+                // input three words
+                Console.WriteLine("Please input 1st word:");
+                string inputS1 = Console.ReadLine();
+                Console.WriteLine("Please input 2nd word:");
+                string inputS2 = Console.ReadLine();
+                Console.WriteLine("Please input 3rd word:");
+                string inputS3 = Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine("Solution:");
+                //string inputS1 = "uber";
+                //string inputS2 = "cool";
+                //string inputS3 = "uncle";
+
+                char[] inputCharS1 = inputS1.ToCharArray();
+                char[] inputCharS2 = inputS2.ToCharArray();
+                char[] inputCharS3 = inputS3.ToCharArray();
+
+                string newStr = inputS1 + inputS2 + inputS3;
+                // Split input string veriable to CharArray
+                // Check how many different letters are used in all of the input veriables
+                char[] newCharArray = newStr.ToCharArray();
+                // Sort char array
+                Array.Sort(newCharArray);
+                // Remove duplicate values in new char array
+                char[] letterUsed = newCharArray.Distinct().ToArray();
+                // Create new dictionary to store input letters and possible values
+                Dictionary<char, int> inputDict = new Dictionary<char, int>();
+                // Store each char into dictionary as a key.
+                for (int i = 0; i < letterUsed.Length; i++)
+                {
+                    if (inputDict.ContainsKey(letterUsed[i]) != true)
+                        inputDict.Add(letterUsed[i], 0);
+                }
+                int CharLength = letterUsed.Length;
+
+                // Call method to convert input words to number
+                int numS1 = convertWodsToNum(inputDict, inputCharS1);
+                int numS2 = convertWodsToNum(inputDict, inputCharS2);
+                int numS3 = convertWodsToNum(inputDict, inputCharS3);
+
+                // Creat a method to convert input words to number
+                static int convertWodsToNum(Dictionary<char, int> inputDict, char[] charIn)
+                {
+                    int numSValue = 0;
+                    for (int k = 0; k < charIn.Length; k++)
+                    {
+                        numSValue += inputDict[charIn[k]] * ((int)Math.Pow(10, charIn.Length - k - 1));
+                    }
+                    return 0;
+                }
+
+                // Identify how many digits are required to store each possible combination with Leading Zeros
+                string Dn = "D" + CharLength.ToString();
+                var minNum = (ulong)Math.Pow(10, CharLength - 2);
+                var maxNum = (ulong)Math.Pow(10, CharLength);
+
+                // Check each combination
+                for (var j = minNum; j < maxNum; j++)
+                {
+                    bool findSolution = false;
+                    int digitDuplicate = 0;
+                    // store each number with Leading Zeros
+                    string storeNum = j.ToString(Dn);
+                    char[] combinationChar = storeNum.ToCharArray();
+                    // Create new dictionary to each possible values
+                    Dictionary<int, int> checkDict = new Dictionary<int, int>();
+                    // Convert each char to int, and then store each digit into dictionary as a value.
+                    for (int i = 0; i < combinationChar.Length; i++)
+                    {
+
+                        int oneDigit = int.Parse(combinationChar[i].ToString());
+                        checkDict.Add(i, oneDigit);
+                        // Check duplicate 
+                        if (checkDict.ContainsValue(oneDigit) == true)
+                        {
+                            digitDuplicate += 1;
+                            break;
+                        }
+
+                    }
+
+                    // Store each non-duplicate combination into dictionary of inputDict as value
+                    if (digitDuplicate == 0)
+                    {
+                        for (int w = 0; w < combinationChar.Length; w++)
+                        {
+                            inputDict[combinationChar[w]] = checkDict[w];
+                        }
+                        // Check this combination whether meet the requirment
+                        if (numS1 + numS2 == numS3)
+                        {
+                            findSolution = true;
+                            foreach (KeyValuePair<char, int> kvp in inputDict)
+                            {
+                                Console.WriteLine("Key = {0}, Value = {1}",
+                                                  kvp.Key, kvp.Value);
+                            }
+                        }
+                    }
+                    else if (j == maxNum - 1 && findSolution == false)
+                        Console.WriteLine("Cannot find solution for this words combination.");
+                    else
+                        continue;
+                }
+
+
             }
             catch (Exception)
             {
