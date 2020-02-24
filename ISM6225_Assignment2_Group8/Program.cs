@@ -240,7 +240,7 @@ namespace Assignment2_CT_Spring2020
                 {
                     myDictQ5b.Add(i, nums1[i]);
                 }
-                // Create a list to store the intersect numbers
+                // Create a list to store the intersect numbers.
                 List<int> outputList = new List<int>();
                 // Scan nums2, check whether there is a same number 
                 for (int t = 0; t < nums2.Length; t++)
